@@ -1,0 +1,99 @@
+﻿@model DailyTrackingSystem.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Finansal Analiz Paneli";
+}
+
+<div class="container mt-4">
+
+    @* BÜTÇE UYARISI *@
+    @if (Model.IsBudgetExceeded)
+    {
+        <div class="alert alert-danger shadow-sm border-0 d-flex align-items-center mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+            <div>
+                <strong>Dikkat!</strong> Aylık harcama limitin olan 100.000 TL'yi aştın. Harcamalarını gözden geçirebilirsin!
+            </div>
+        </div>
+    }
+
+    @* İSTATİSTİK KARTLARI *@
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card bg-success text-white shadow border-0 h-100">
+                <div class="card-body">
+                    <h6 class="card-title text-white-50">En Çok Harcanan Kategori</h6>
+                    <h2 class="fw-bold">@Model.TopCategory</h2>
+                    <i class="bi bi-graph-up-arrow position-absolute end-0 bottom-0 m-3 opacity-25 fs-1"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card bg-success text-white shadow border-0 h-100">
+                <div class="card-body">
+                    <h6 class="card-title text-white-50">Bu Ayın Gideri</h6>
+                    <h2 class="fw-bold">@Model.MonthlySpending.ToString("C2")</h2>
+                    <i class="bi bi-calendar-check position-absolute end-0 bottom-0 m-3 opacity-25 fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card bg-success text-white shadow border-0 h-100">
+                <div class="card-body">
+                    <h6 class="card-title text-white-50">Toplam Harcama</h6>
+                    <h2 class="fw-bold">@Model.TotalSpending.ToString("C2")</h2>
+                    <i class="bi bi-wallet2 position-absolute end-0 bottom-0 m-3 opacity-25 fs-1"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card bg-success text-white shadow border-0 h-100">
+                <div class="card-body">
+                    <h6 class="card-title text-white-50">Aktif Kategori Sayısı</h6>
+                    <h2 class="fw-bold">@Model.ActiveCategoryCount Adet</h2>
+                    <i class="bi bi-tags position-absolute end-0 bottom-0 m-3 opacity-25 fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* SON İŞLEMLER PANELİ *@
+    <div class="card shadow-sm border-0 mb-5">
+        <div class="card-header bg-dark text-white d-sm-flex justify-content-between align-items-center p-3">
+            <h5 class="mb-0">Son 5 Harcama İşlemi</h5>
+            <a href="/Spending/Index" class="btn btn-sm btn-outline-light">Tüm Harcamaları Gör</a>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Açıklama</th>
+                        <th class="text-center">Tarih</th>
+                        <th class="text-center">Kategori</th>
+                        @* Burayı text-end bıraktık *@
+                        <th class="text-end pe-4">Tutar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.RecentSpendings)
+                    {
+                        <tr>
+                            <td class="fw-bold ps-4">@item.Description</td>
+                            <td class="text-center fw-bold">@item.Date.ToShortDateString()</td>
+                            <td class="text-center align-middle">
+                                <span class="badge bg-info text-dark p-2 shadow-sm">
+                                    @item.Category.Name
+                                </span>
+                            </td>
+                            @* DÜZELTME: Burayı da text-end yaparak başlıkla hizaladık *@
+                            <td class="text-end align-middle text-success fw-bold pe-4">@item.Amount.ToString("C2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

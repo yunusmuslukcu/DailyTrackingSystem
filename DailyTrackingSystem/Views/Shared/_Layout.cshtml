@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Harcaman Takipte!</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DailyTrackingSystem.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        /* Sayfa Yapılandırması */
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+
+        .content-wrapper {
+            flex: 1 0 auto;
+            padding-bottom: 50px;
+        }
+
+        .main-footer {
+            flex-shrink: 0;
+            width: 100%;
+            background-color: #212529;
+            color: white;
+            padding: 2rem 0;
+            border-top: 1px solid #dee2e6;
+        }
+
+        /* UI İyileştirmeleri & Geçişler */
+        .nav-link {
+            font-size: 1.15rem;
+            font-weight: 500;
+            transition: all 0.4s ease-in-out; /* Geçiş süresini biraz daha uzatıp yumuşattık */
+            margin-right: 15px;
+            border-bottom: 2px solid transparent; /* Titremeyi önlemek için hayalet çizgi */
+            color: white !important;
+        }
+
+            /* Hover Durumu */
+            .nav-link:hover {
+                color: #198754 !important;
+                transform: translateY(-2px);
+            }
+
+            /* AKTİF LİNK DURUMU (Senin istediğin kalıcı yeşil yazı ve çizgi) */
+            .nav-link.active-link {
+                color: #198754 !important;
+                font-weight: bold;
+                border-bottom: 2px solid #198754;
+            }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-4 p-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-success" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-safe2"></i> Harcaman Takipte!
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Kategoriler</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Spending" asp-action="Index">Harcamalar</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container text-center">
+            &copy; 2026 - <span class="text-success fw-bold">Harcaman Takipte!</span> -
+            <span class="text-white">Geliştirici: Yunus Muslukcu</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentUrl = window.location.pathname;
+            const navLinks = document.querySelectorAll(".nav-link");
+
+            navLinks.forEach(link => {
+                // Linkin href değeri ile mevcut URL eşleşiyorsa klas ekle
+                if (link.getAttribute("href") === currentUrl) {
+                    link.classList.add("active-link");
+                }
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

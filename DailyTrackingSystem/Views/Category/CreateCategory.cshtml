@@ -1,0 +1,49 @@
+﻿@model DailyTrackingSystem.Models.Category
+
+@{
+    ViewData["Title"] = "Kategori Ekle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                @* Kart başlığı - Artı sembolü kaldırıldı ve yazı beyaz (text-white) yapıldı *@
+                <div class="card-header bg-dark text-white p-3">
+                    <h4 class="mb-0 fw-bold text-center">
+                        Kategori Ekle
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="CreateCategory" method="post">
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Kategori Seçiniz</label>
+                            <select asp-for="Icon" class="form-control form-select-lg border-2" asp-items="(List<SelectListItem>)ViewBag.Icons">
+                                <option value="">-- Kategori Seçiniz --</option>
+                            </select>
+                            <span asp-validation-for="Icon" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4 form-check">
+                            <input asp-for="Status" class="form-check-input border-2" checked />
+                            <label asp-for="Status" class="form-check-label fw-semibold">Aktif mi?</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            @* Kaydet butonu yeşil (btn-success) *@
+                            <button type="submit" class="btn btn-success btn-lg fw-bold shadow-sm">
+                                <i class="bi bi-check-circle me-1"></i> Kaydet
+                            </button>
+
+                            @* Geri dön butonu *@
+                            <a asp-action="Index" class="btn btn-outline-dark fw-semibold">
+                                <i class="bi bi-arrow-left-circle me-1"></i> Geri Dön
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model List<DailyTrackingSystem.Models.Spending>
+
+@{
+    ViewData["Title"] = "Spendings";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Harcama Listesi</h2>
+        <a href="/Spending/CreateSpending" class="btn btn-success shadow-sm">
+            <i class="bi bi-plus-circle"></i> Harcama Ekle
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th>Açıklama</th>
+                        <th class="text-center">Tutar</th>
+                        <th class="text-center">Tarih</th>
+                        <th class="text-center">Kategori</th>
+                        <th class="text-center" style="width: 200px;">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">@item.Id</td>
+                            <td class="align-middle fw-bold">@item.Description</td>
+                            <td class="text-center align-middle text-success fw-bold">
+                                @item.Amount.ToString("C2")
+                            </td>
+                            <td class="text-center align-middle">
+                                @item.Date.ToShortDateString()
+                            </td>
+                            <td class="text-center align-middle">
+                                <span class="badge bg-info text-dark p-2 shadow-sm">
+                                    @item.Category.Name
+                                </span>
+                            </td>
+                            <td class="text-center align-middle">
+                                <div class="btn-group" role="group">
+                                    <a href="/Spending/UpdateSpending/@item.Id"
+                                       class="btn btn-outline-warning btn-sm mx-1">
+                                        <i class="bi bi-pencil"></i> Güncelle
+                                    </a>
+                                    <a href="/Spending/DeleteSpending/@item.Id"
+                                       class="btn btn-outline-danger btn-sm mx-1"
+                                       onclick="return confirm('Bu harcamayı silmek istediğinize emin misiniz?')">
+                                        <i class="bi bi-trash"></i> Sil
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

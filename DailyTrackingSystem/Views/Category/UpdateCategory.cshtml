@@ -1,0 +1,50 @@
+﻿@model DailyTrackingSystem.Models.Category
+
+@{
+    ViewData["Title"] = "Kategori Güncelle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                @* Başlık alanı: Dark Mode ve Beyaz Yazı *@
+                <div class="card-header bg-dark text-white p-3 text-center">
+                    <h4 class="mb-0 fw-bold">Kategori Güncelle</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="UpdateCategory" method="post">
+                        @* ID alanını gizli olarak gönderiyoruz *@
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark">Kategori Seçiniz</label>
+                            <select asp-for="Icon" class="form-control form-select-lg border-2" asp-items="(List<SelectListItem>)ViewBag.Icons">
+                                <option value="">-- Kategori Değiştir --</option>
+                            </select>
+                            <span asp-validation-for="Icon" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4 form-check">
+                            <input asp-for="Status" class="form-check-input border-2" />
+                            <label asp-for="Status" class="form-check-label fw-semibold">Aktif mi?</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            @* Kaydet Butonu: Yeşil ve İkonlu *@
+                            <button type="submit" class="btn btn-success btn-lg fw-bold shadow-sm">
+                                <i class="bi bi-check-circle me-1"></i> Değişiklikleri Kaydet
+                            </button>
+
+                            @* Geri Dön Butonu: Koyu Çerçeveli ve İkonlu *@
+                            <a asp-action="Index" class="btn btn-outline-dark fw-semibold">
+                                <i class="bi bi-arrow-left-circle me-1"></i> Geri Dön
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
