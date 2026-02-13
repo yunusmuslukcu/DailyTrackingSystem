@@ -15,13 +15,13 @@ Ne Yapıyor?
 
 Kullanılan Teknolojiler
 
- .NET 8.0
- ASP.NET Core MVC 8.0 
- Entity Framework Core 8.0 
- SQL Server Express  
- Bootstrap 5.x 
- Bootstrap Icons 1.11.3 
- jQuery 3.x 
+ - .NET 8.0
+ - ASP.NET Core MVC 8.0 
+ - Entity Framework Core 8.0 
+ - SQL Server Express  
+ - Bootstrap 5.x 
+ - Bootstrap Icons 1.11.3 
+ - jQuery 3.x 
 
 Öne Çıkan Teknik Detaylar
 
